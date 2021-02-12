@@ -7,9 +7,16 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <time.h>     
+#include "world.h"
+#include "saveload.h";
+
 #define bitmap ALLEGRO_BITMAP
 #define load_bitmap al_load_bitmap
 #define draw_bitmap al_draw_bitmap
+
+
+using namespace World;
+
 void must_init(bool test, const char* description)
 {
     if (test) return;
@@ -21,13 +28,6 @@ void must_init(bool test, const char* description)
 struct vector2 {
     int x;
     int y;
-};
-
-struct tile
-{
-    int x;
-    int y;
-    int type;
 };
 
 int main()
@@ -67,6 +67,7 @@ int main()
     must_init(water, "water");
     bitmap* player = load_bitmap("player.png");
     must_init(player, "playyer");
+    bitmap* slot = load_bitmap("slot.png");
 
     //Player init
     vector2 playerLocation = vector2{ 100,100 };
@@ -82,6 +83,7 @@ int main()
 
     //"World gen"
     std::list<tile> world;
+  //  World::world world = new World();
     srand(time(NULL));
     int maxWidth = (int)50;
     int maxHeight = (int)50;
@@ -135,6 +137,10 @@ int main()
             case ALLEGRO_KEY_D:
                 playerLocation.x += playerSpeed;
                 break;
+            case ALLEGRO_KEY_0:
+                saveTileData("test", world);
+            case ALLEGRO_KEY_1:
+                world = loadTileData("test");
             
             }
             break;
