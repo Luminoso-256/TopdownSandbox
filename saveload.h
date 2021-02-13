@@ -5,7 +5,6 @@
 #include<string>
 #include "world.h";
 using namespace std;
-using namespace World;
 
 
 void saveTileData(string filename, list<tile> tiles);

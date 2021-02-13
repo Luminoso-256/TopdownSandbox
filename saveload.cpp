@@ -2,7 +2,8 @@
 #include <fstream>
 #include<list>
 #include<string>
-#include "world.h";
+#include "world.h"
+#include "tile.h"
 using namespace std;
 
 /// <summary>
@@ -10,11 +11,11 @@ using namespace std;
 /// </summary>
 /// <param name="filename">the name of the file **not a path!**</param>
 /// <param name="tiles">the list of the data</param>
-void saveTileData(string filename, list<tile> tiles) {
+void saveTileData(string filename, list<Tile> tiles) {
 	ofstream saveFile;
 	saveFile.open(filename + "_save.keystone");
 	//Each row will hold a single tile. This is horrible design. It is also easy design.
-	for (const tile tile: tiles) {
+	for (const Tile tile: tiles) {
 		saveFile << tile.x << "|" << tile.y << "|" << tile.type << "|\n";
 	}
 	saveFile.close();
@@ -25,8 +26,8 @@ void saveTileData(string filename, list<tile> tiles) {
 /// </summary>
 /// <param name="filename">the name of the savefile **not a path**</param>
 /// <returns>a list of tiles</returns>
-list<tile> loadTileData(string filename) {
-	list<tile> tiles;
+list<Tile> loadTileData(string filename) {
+	list<Tile> tiles;
 
 	//Filestream
 	string line;
@@ -57,7 +58,7 @@ list<tile> loadTileData(string filename) {
 			int type = stoi(*it, nullptr);
 			
 			tiles.push_back(
-				tile{
+				Tile{
 					x,y,type
 				}
 			);

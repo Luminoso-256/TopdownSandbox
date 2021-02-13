@@ -1,15 +1,12 @@
 #pragma once
 
 #include"entity.h"
+#include "tile.h"
+#include <list>
 
-struct tile {
-	int x;
-	int y;
-	int type;
-};
 class World {
 public:
-	list<tile> worldTiles;
-	list<Entity> entities;
+	std::list<Tile> worldTiles;
+	std::list<Entity> entities;
 };
 

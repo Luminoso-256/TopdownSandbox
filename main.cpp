@@ -11,6 +11,7 @@
 #include "saveload.h"
 #include <string>
 #include "util.h"
+#include "tile.h"
 
 #define bitmap ALLEGRO_BITMAP
 #define load_bitmap al_load_bitmap
@@ -32,7 +33,7 @@ struct vector2 {
     int y;
 };
 
-void renderTile(tile worldtile, bitmap* textures[255]) {
+void renderTile(Tile worldtile, bitmap* textures[255]) {
     switch (worldtile.type) {
     case 1:
         draw_bitmap(textures[0], worldtile.x * 16, worldtile.y * 16, 0);
@@ -116,7 +117,7 @@ int main()
     ALLEGRO_EVENT event;
 
     //"World gen"
-    std::list<tile> world;
+    std::list<Tile> world;
   //  World::world world = new World();
    // 1580, 960
     srand(time(NULL));
@@ -137,7 +138,7 @@ int main()
             //Perlin noise
             
 
-            tile worldtile = tile{
+            Tile worldtile = Tile{
                 x,
                 y,
                 type
@@ -191,7 +192,7 @@ int main()
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
           
-            for (const tile worldtile : world) {
+            for (const Tile worldtile : world) {
                 renderTile(worldtile, tileTextures);
             }
             al_draw_filled_rectangle(0, 95, 45, 500, al_map_rgba_f(0, 0, 0, 0.7));
