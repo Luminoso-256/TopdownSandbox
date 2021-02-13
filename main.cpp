@@ -195,8 +195,8 @@ int main()
             }
             al_draw_filled_rectangle(0, 95, 45, 500, al_map_rgba_f(0, 0, 0, 0.7));
             //UI
-            al_draw_text(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Keystone | Prototype Build");
-            al_draw_text(font, al_map_rgb(255, 255, 255), 0, 20, 0, "");
+            al_draw_textf(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Keystone | %c", version);
+            
 
             //Inventory
 
@@ -205,6 +205,7 @@ int main()
             for (int i = 1; i < 11; i++) {
                 draw_bitmap(slot, 5, 60 + 40 * i, 0);
                 draw_bitmap(planks, 13, 60 + 40 * i + 9, 0);
+                al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 60 + 40 * i + 5, 0, "99");
             }
 
             draw_bitmap(player, playerLocation.x, playerLocation.y, 0);
