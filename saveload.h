@@ -7,5 +7,5 @@
 using namespace std;
 
 
-void saveTileData(string filename, list<tile> tiles);
-list<tile> loadTileData(string filename);
+void saveTileData(string filename, list<Tile> tiles);
+list<Tile> loadTileData(string filename);

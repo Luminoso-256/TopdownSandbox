@@ -12,6 +12,7 @@
 #include <string>
 #include "util.h"
 #include "tile.h"
+#include "tiles.h"
 
 #define bitmap ALLEGRO_BITMAP
 #define load_bitmap al_load_bitmap
@@ -33,31 +34,6 @@ struct vector2 {
     int y;
 };
 
-void renderTile(Tile worldtile, bitmap* textures[255]) {
-    switch (worldtile.type) {
-    case 1:
-        draw_bitmap(textures[0], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    case 2:
-        draw_bitmap(textures[1], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    case 3:
-        draw_bitmap(textures[2], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    case 4:
-        draw_bitmap(textures[3], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    case 5:
-        draw_bitmap(textures[4], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    case 6:
-        draw_bitmap(textures[5], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    case 7:
-        draw_bitmap(textures[6], worldtile.x * 16, worldtile.y * 16, 0);
-        break;
-    }
-}
 int main()
 {
     must_init(al_init(), "Project Keystone");
@@ -84,22 +60,27 @@ int main()
 
     must_init(al_init_image_addon(), "image addon");
     bitmap* tileTextures[255]{};
-    tileTextures[0] = load_bitmap("res/dirt.png");
+    tileTextures[0] = load_bitmap("res/tex/tile/dirt.png");
     must_init(tileTextures[0], "dirt");
-    tileTextures[1] = load_bitmap("res/grass.png");
+    tileTextures[1] = load_bitmap("res/tex/tile/grass.png");
     must_init(tileTextures[1], "grass");
-    tileTextures[2] = load_bitmap("res/sand.png");
+    tileTextures[2] = load_bitmap("res/tex/tile/sand.png");
     must_init(tileTextures[2], "sand");
-    tileTextures[3] = load_bitmap("res/water.png");
+    tileTextures[3] = load_bitmap("res/tex/tile/water.png");
     must_init(tileTextures[3], "water");
-    tileTextures[4] = load_bitmap("res/leaf.png");
-    tileTextures[5] = load_bitmap("res/planks.png");
-    tileTextures[6] = load_bitmap("res/mossy_stone.png");
+    tileTextures[4] = load_bitmap("res/tex/tile/leaf.png");
+    must_init(tileTextures[4], "leaf");
+    tileTextures[5] = load_bitmap("res/tex/tile/planks.png");
+    must_init(tileTextures[5], "planks");
+    tileTextures[6] = load_bitmap("res/tex/tile/mossy_stone.png");
+    must_init(tileTextures[6], "moss stone");
 
-    bitmap* player = load_bitmap("res/player.png");
+    bitmap* player = load_bitmap("res/tex/player.png");
     must_init(player, "player");
-    bitmap* slot = load_bitmap("res/slot.png");
- 
+    bitmap* unselectedSlot = load_bitmap("res/tex/slot_unselected.png");
+    must_init(unselectedSlot, "unsel slot");
+    bitmap* selectedSlot = load_bitmap("res/tex/slot_selected.png");
+    must_init(selectedSlot, "sel slot");
 
 
 
@@ -129,20 +110,19 @@ int main()
     
         for (int y = 0; y < maxHeight; y++) {
             
-            float noiseVal = rand() % 7 + 1;
+            int noiseVal = rand() % 2 + 1;
 
             //noiseVal = noiseVal / 10000;
+            Tile worldtile;
+            switch (noiseVal) {
+            case 1:
+                worldtile = DirtTile(x, y);
+                break;
+            case 2:
+                worldtile =GrassTile(x, y);
+                break;
+            }
 
-            int type = noiseVal;
-          // std::cout << " noise value at " << x << "," << y << ":" << noiseVal << "\n";
-            //Perlin noise
-            
-
-            Tile worldtile = Tile{
-                x,
-                y,
-                type
-            };
             world.push_back(worldtile);
         }
     }
@@ -193,11 +173,11 @@ int main()
             al_clear_to_color(al_map_rgb(0, 0, 0));
           
             for (const Tile worldtile : world) {
-                renderTile(worldtile, tileTextures);
+                draw_bitmap(tileTextures[worldtile.textureIndex], worldtile.x * 16, worldtile.y * 16, 0);
             }
             al_draw_filled_rectangle(0, 95, 45, 500, al_map_rgba_f(0, 0, 0, 0.7));
             //UI
-            al_draw_textf(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Keystone  %c", version);
+            al_draw_textf(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Topdown Sandbox Project  %c", version);
             
 
             //Inventory
@@ -205,8 +185,13 @@ int main()
             //draw slots
 
             for (int i = 1; i < 11; i++) {
-                draw_bitmap(slot, 5, 60 + 40 * i, 0);
-                draw_bitmap(tileTextures[0], 13, 60 + 40 * i + 9, 0);
+                if (i != 1) {
+                    draw_bitmap(unselectedSlot, 5, 60 + 40 * i, 0);
+                }
+                else {
+                    draw_bitmap(selectedSlot, 5, 60 + 40 * i, 0);
+                }
+                draw_bitmap(tileTextures[5], 13, 60 + 40 * i + 9, 0);
                 al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 60 + 40 * i + 5, 0, "99");
             }
 

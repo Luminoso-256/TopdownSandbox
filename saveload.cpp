@@ -64,6 +64,7 @@ list<Tile> loadTileData(string filename) {
 			);
 		}
 	}
+	saveStream.close();
 
 	return tiles;
 }

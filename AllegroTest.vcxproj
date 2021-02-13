@@ -24,6 +24,7 @@
     <ProjectGuid>{9ea249ca-483e-4e33-8188-5618372640a3}</ProjectGuid>
     <RootNamespace>AllegroTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>TopdownSandbox</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -166,16 +167,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DirtTile.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="GrassTile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="saveload.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirtTile.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="GrassTile.h" />
     <ClInclude Include="saveload.h" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="tiles.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>

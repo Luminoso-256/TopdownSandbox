@@ -10,3 +10,4 @@ template<typename Base, typename T>
 inline bool instanceOf(const T*) {
 	return is_base_of<Base, T>::value;
 }
+

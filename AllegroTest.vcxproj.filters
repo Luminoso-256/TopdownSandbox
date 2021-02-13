@@ -16,6 +16,12 @@
     <Filter Include="Source Files\entities">
       <UniqueIdentifier>{691e447f-0c05-45f6-88d5-5e736eaaf4bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\tiles">
+      <UniqueIdentifier>{09c5c440-324f-44f3-b3f6-9b4163446fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tiles">
+      <UniqueIdentifier>{08457b50-689e-40b1-beeb-d42f68d2d9ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -36,6 +42,12 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GrassTile.cpp">
+      <Filter>Source Files\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtTile.cpp">
+      <Filter>Source Files\tiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world.h">
@@ -51,6 +63,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GrassTile.h">
+      <Filter>Header Files\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtTile.h">
+      <Filter>Header Files\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="tiles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
