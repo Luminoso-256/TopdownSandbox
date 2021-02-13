@@ -8,15 +8,14 @@
 #include <allegro5/allegro_primitives.h>
 #include <time.h>     
 #include "world.h"
-#include "saveload.h";
+#include "saveload.h"
 #include <string>
+#include "util.h"
 
 #define bitmap ALLEGRO_BITMAP
 #define load_bitmap al_load_bitmap
 #define draw_bitmap al_draw_bitmap
 
-
-using namespace World;
 const string version = "Proto-2";
 
 
@@ -33,6 +32,31 @@ struct vector2 {
     int y;
 };
 
+void renderTile(tile worldtile, bitmap* textures[255]) {
+    switch (worldtile.type) {
+    case 1:
+        draw_bitmap(textures[0], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    case 2:
+        draw_bitmap(textures[1], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    case 3:
+        draw_bitmap(textures[2], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    case 4:
+        draw_bitmap(textures[3], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    case 5:
+        draw_bitmap(textures[4], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    case 6:
+        draw_bitmap(textures[5], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    case 7:
+        draw_bitmap(textures[6], worldtile.x * 16, worldtile.y * 16, 0);
+        break;
+    }
+}
 int main()
 {
     must_init(al_init(), "Project Keystone");
@@ -58,22 +82,25 @@ int main()
     must_init(al_init_primitives_addon(), "primitives");
 
     must_init(al_init_image_addon(), "image addon");
-    ALLEGRO_BITMAP* mysha = al_load_bitmap("mysha.png");
-    must_init(mysha, "mysha");
-    bitmap* dirt = load_bitmap("dirt.png");
-    must_init(dirt, "dirt");
-    bitmap* grass = load_bitmap("grass.png");
-    must_init(grass, "grass");
-    bitmap* sand = load_bitmap("sand.png");
-    must_init(sand, "sand");
-    bitmap* water = load_bitmap("water.png");
-    must_init(water, "water");
-    bitmap* player = load_bitmap("player.png");
+    bitmap* tileTextures[255]{};
+    tileTextures[0] = load_bitmap("res/dirt.png");
+    must_init(tileTextures[0], "dirt");
+    tileTextures[1] = load_bitmap("res/grass.png");
+    must_init(tileTextures[1], "grass");
+    tileTextures[2] = load_bitmap("res/sand.png");
+    must_init(tileTextures[2], "sand");
+    tileTextures[3] = load_bitmap("res/water.png");
+    must_init(tileTextures[3], "water");
+    tileTextures[4] = load_bitmap("res/leaf.png");
+    tileTextures[5] = load_bitmap("res/planks.png");
+    tileTextures[6] = load_bitmap("res/mossy_stone.png");
+
+    bitmap* player = load_bitmap("res/player.png");
     must_init(player, "player");
-    bitmap* slot = load_bitmap("slot.png");
-    bitmap* leaf = load_bitmap("leaf.png");
-    bitmap* planks = load_bitmap("planks.png");
-    bitmap* mossyCobble = load_bitmap("mossy_cobblestone");
+    bitmap* slot = load_bitmap("res/slot.png");
+ 
+
+
 
     //Player init
     vector2 playerLocation = vector2{ 100,100 };
@@ -101,7 +128,7 @@ int main()
     
         for (int y = 0; y < maxHeight; y++) {
             
-            float noiseVal = rand() % 6 + 1;
+            float noiseVal = rand() % 7 + 1;
 
             //noiseVal = noiseVal / 10000;
 
@@ -165,37 +192,11 @@ int main()
             al_clear_to_color(al_map_rgb(0, 0, 0));
           
             for (const tile worldtile : world) {
-                switch (worldtile.type) {
-                case 1:
-                   // std::cout << "drawing dirt \n";
-                    draw_bitmap(dirt, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-                case 2:
-                   // std::cout << "drawing sand \n";
-                    draw_bitmap(sand, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-                case 3:
-                   // std::cout << "drawing grass \n";
-                    draw_bitmap(grass, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-                case 4:
-                    draw_bitmap(water, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-                case 5:
-                    draw_bitmap(leaf, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-                case 6:
-                    draw_bitmap(planks, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-                case 7:
-                    draw_bitmap(mossyCobble, worldtile.x * 16, worldtile.y * 16, 0);
-                    break;
-
-                }
+                renderTile(worldtile, tileTextures);
             }
             al_draw_filled_rectangle(0, 95, 45, 500, al_map_rgba_f(0, 0, 0, 0.7));
             //UI
-            al_draw_textf(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Keystone | %c", version);
+            al_draw_textf(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Keystone  %c", version);
             
 
             //Inventory
@@ -204,7 +205,7 @@ int main()
 
             for (int i = 1; i < 11; i++) {
                 draw_bitmap(slot, 5, 60 + 40 * i, 0);
-                draw_bitmap(planks, 13, 60 + 40 * i + 9, 0);
+                draw_bitmap(tileTextures[0], 13, 60 + 40 * i + 9, 0);
                 al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 60 + 40 * i + 5, 0, "99");
             }
 
@@ -223,7 +224,7 @@ int main()
         }
     }
 
-    al_destroy_bitmap(mysha);
+ 
     al_destroy_font(font);
     al_destroy_display(disp);
     al_destroy_timer(timer);

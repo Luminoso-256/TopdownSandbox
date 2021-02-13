@@ -171,6 +171,7 @@
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="player.h" />
     <ClInclude Include="saveload.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>

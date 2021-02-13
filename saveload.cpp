@@ -4,7 +4,6 @@
 #include<string>
 #include "world.h";
 using namespace std;
-using namespace World;
 
 /// <summary>
 /// Save a set of tile data to a keystone file
@@ -21,6 +20,11 @@ void saveTileData(string filename, list<tile> tiles) {
 	saveFile.close();
 }
 
+/// <summary>
+/// Loads tile data
+/// </summary>
+/// <param name="filename">the name of the savefile **not a path**</param>
+/// <returns>a list of tiles</returns>
 list<tile> loadTileData(string filename) {
 	list<tile> tiles;
 
