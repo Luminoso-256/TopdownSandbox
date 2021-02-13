@@ -9,6 +9,7 @@
 #include <time.h>     
 #include "world.h"
 #include "saveload.h";
+#include <string>
 
 #define bitmap ALLEGRO_BITMAP
 #define load_bitmap al_load_bitmap
@@ -16,6 +17,8 @@
 
 
 using namespace World;
+const string version = "Proto-2";
+
 
 void must_init(bool test, const char* description)
 {
@@ -32,7 +35,7 @@ struct vector2 {
 
 int main()
 {
-    must_init(al_init(), "allegro");
+    must_init(al_init(), "Project Keystone");
     must_init(al_install_keyboard(), "keyboard");
 
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
@@ -46,7 +49,7 @@ int main()
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    ALLEGRO_DISPLAY* disp = al_create_display(640, 480);
+    ALLEGRO_DISPLAY* disp = al_create_display(1580, 960);
     must_init(disp, "display");
 
     ALLEGRO_FONT* font = al_create_builtin_font();
@@ -66,8 +69,11 @@ int main()
     bitmap* water = load_bitmap("water.png");
     must_init(water, "water");
     bitmap* player = load_bitmap("player.png");
-    must_init(player, "playyer");
+    must_init(player, "player");
     bitmap* slot = load_bitmap("slot.png");
+    bitmap* leaf = load_bitmap("leaf.png");
+    bitmap* planks = load_bitmap("planks.png");
+    bitmap* mossyCobble = load_bitmap("mossy_cobblestone");
 
     //Player init
     vector2 playerLocation = vector2{ 100,100 };
@@ -79,21 +85,23 @@ int main()
 
     bool done = false;
     bool redraw = true;
+    int activeType = 1;
     ALLEGRO_EVENT event;
 
     //"World gen"
     std::list<tile> world;
   //  World::world world = new World();
+   // 1580, 960
     srand(time(NULL));
-    int maxWidth = (int)50;
-    int maxHeight = (int)50;
+    int maxWidth = (int)1580/16+1;
+    int maxHeight = (int)960/16;
 
 
     for (int x = 0; x < maxWidth; x++) {
     
         for (int y = 0; y < maxHeight; y++) {
             
-            float noiseVal = rand() % 4 + 1;
+            float noiseVal = rand() % 6 + 1;
 
             //noiseVal = noiseVal / 10000;
 
@@ -155,11 +163,7 @@ int main()
         if (redraw && al_is_event_queue_empty(queue))
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
-            //al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Hello world!");
-
-
-
-
+          
             for (const tile worldtile : world) {
                 switch (worldtile.type) {
                 case 1:
@@ -177,7 +181,30 @@ int main()
                 case 4:
                     draw_bitmap(water, worldtile.x * 16, worldtile.y * 16, 0);
                     break;
+                case 5:
+                    draw_bitmap(leaf, worldtile.x * 16, worldtile.y * 16, 0);
+                    break;
+                case 6:
+                    draw_bitmap(planks, worldtile.x * 16, worldtile.y * 16, 0);
+                    break;
+                case 7:
+                    draw_bitmap(mossyCobble, worldtile.x * 16, worldtile.y * 16, 0);
+                    break;
+
                 }
+            }
+            al_draw_filled_rectangle(0, 95, 45, 500, al_map_rgba_f(0, 0, 0, 0.7));
+            //UI
+            al_draw_text(font, al_map_rgb(0, 0, 0), 0, 0, 0, "Keystone | Prototype Build");
+            al_draw_text(font, al_map_rgb(255, 255, 255), 0, 20, 0, "");
+
+            //Inventory
+
+            //draw slots
+
+            for (int i = 1; i < 11; i++) {
+                draw_bitmap(slot, 5, 60 + 40 * i, 0);
+                draw_bitmap(planks, 13, 60 + 40 * i + 9, 0);
             }
 
             draw_bitmap(player, playerLocation.x, playerLocation.y, 0);
