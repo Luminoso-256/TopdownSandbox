@@ -1,5 +1,26 @@
 Top Down Sandbox  - tech notes!
 
+
+Architecture:
+Each entity/tile has three functions:
+init() - load textures/variables ETC on spawn/load. Each object keeps their textures encapsulated because texture indices are dumb
+tick() - called every frame, with keyboard params. This is where logic, AI, collisions, stat handling, etc happy
+render() - everything can render itself. no need for a centralized system. allows more customization.
+
+important fields:
+each entity/tile also has a modificationQueue, which is a list of type Modification, where modification is a struct describing a modification to the world. this prevent s the need for the container to pass it's state to the contained.
+
+World class holds tiles and entities
+World is resposible for adding/removing tiles, and killing/spawning entities
+
+
+
+
+
+
+
+
+
 TILE IDS:
 Dirt = 1
 Grass = 2
@@ -7,22 +28,5 @@ Sand = 3
 Water = 4
 Planks = 5
 
-
-TileTexture IDS:
-(yes im being lazy and copy/pasting source code.)
- tileTextures[0] = load_bitmap("res/tex/tile/dirt.png");
-    must_init(tileTextures[0], "dirt");
-    tileTextures[1] = load_bitmap("res/tex/tile/grass.png");
-    must_init(tileTextures[1], "grass");
-    tileTextures[2] = load_bitmap("res/tex/tile/sand.png");
-    must_init(tileTextures[2], "sand");
-    tileTextures[3] = load_bitmap("res/tex/tile/water.png");
-    must_init(tileTextures[3], "water");
-    tileTextures[4] = load_bitmap("res/tex/tile/leaf.png");
-    must_init(tileTextures[4], "leaf");
-    tileTextures[5] = load_bitmap("res/tex/tile/planks.png");
-    must_init(tileTextures[5], "planks");
-    tileTextures[6] = load_bitmap("res/tex/tile/mossy_stone.png");
-    must_init(tileTextures[6], "moss stone");
 
 Entity IDS:

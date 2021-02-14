@@ -1,12 +1,14 @@
 #pragma once
 #include "tile.h"
-class GrassTile : public Tile {
+#include <vector>
+class GrassTile : private Tile {
 public:
 	GrassTile(int x, int y) {
 		this->x = x;
 		this->y = y;
-		this->height = 0; //You  can  walk on grass tiles, unlesss you raise em
-		this->type = 2;
-		this->textureIndex = 1;
+		this->type = 1;
 	}
+	void init();
+	void render();
+	void tick();
 };
