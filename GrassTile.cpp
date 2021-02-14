@@ -9,8 +9,8 @@
 void GrassTile::init(void) {
 	//Load textures
 	//std::cout << "INIT!";
-	RenderSystemSingleton* rs = rs->getInstance();
-    rs->setTexture(0, al_load_bitmap("res/tex/tile/grass.png"));
+	this->containingWorld->textures[0] = al_load_bitmap("res/tex/tile/grass.png");
+ //   rs->setTexture(0, al_load_bitmap("res/tex/tile/grass.png"));
 }
 
 void GrassTile::render(void) {
@@ -21,8 +21,7 @@ void GrassTile::render(void) {
 		this->y,
 		0
 	};
-	RenderSystemSingleton* rs = rs->getInstance();
-	rs->addToQueue(renderObject);
+	this->containingWorld->renderQueue.push_back(renderObject);
 	
 }
 

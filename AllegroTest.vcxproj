@@ -167,7 +167,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DirtTile.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="GrassTile.cpp" />
     <ClCompile Include="main.cpp" />
@@ -176,7 +175,6 @@
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirtTile.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="GrassTile.h" />
     <ClInclude Include="renderSystem.h" />

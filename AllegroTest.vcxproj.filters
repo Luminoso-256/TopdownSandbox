@@ -39,14 +39,11 @@
     <ClCompile Include="entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GrassTile.cpp">
       <Filter>Source Files\tiles</Filter>
     </ClCompile>
-    <ClCompile Include="DirtTile.cpp">
-      <Filter>Source Files\tiles</Filter>
+    <ClCompile Include="tile.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,12 +59,6 @@
     <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirtTile.h">
-      <Filter>Header Files\tiles</Filter>
-    </ClInclude>
     <ClInclude Include="GrassTile.h">
       <Filter>Header Files\tiles</Filter>
     </ClInclude>
@@ -75,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
