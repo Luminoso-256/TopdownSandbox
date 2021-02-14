@@ -1,4 +1,11 @@
 #include <list>
 #include <string>
-using namespace std;
+#include "world.h"
+#include <vector>
 
+std::vector<renderQueueObject> World::generateWorldRenderQueue(void) {
+	std::vector<renderQueueObject> masterQueue;
+
+
+	return masterQueue;
+}

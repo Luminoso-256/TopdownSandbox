@@ -2,13 +2,16 @@
 
 #include"entity.h"
 #include "tile.h"
-#include <list>
+#include <vector>
 #include <string>
+#include "renderSystem.h"
+
 
 class World {
 public:
-	std::list<Tile> worldTiles;
-	std::list<Entity> entities;
-	std::string name;
+	std::vector<Tile> tiles;
+	//==Insert entity vec here when i have entity class ready==
+	std::string worldName; // name for save/load
+	std::vector<renderQueueObject> generateWorldRenderQueue; 
 };
 

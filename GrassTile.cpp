@@ -3,7 +3,6 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
-#include "const.h"
 #include <vector>
 
 void GrassTile::init(void) {
@@ -12,7 +11,12 @@ void GrassTile::init(void) {
 }
 
 void GrassTile::render(void) {
-	al_draw_bitmap(this->textures[0], this->x * 16, this->y * 16, 0);
+	renderQueueObject renderObject = renderQueueObject{
+		0,
+		this->x*16,
+		this->y*16
+	};
+	this->renderQueue.push_back(renderObject);
 }
 
 void GrassTile::tick(void) {
