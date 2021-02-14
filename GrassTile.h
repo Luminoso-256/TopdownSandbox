@@ -1,14 +1,14 @@
 #pragma once
 #include "tile.h"
 #include <vector>
-class GrassTile : private Tile {
+class GrassTile : public Tile {
 public:
 	GrassTile(int x, int y) {
 		this->x = x;
 		this->y = y;
 		this->type = 1;
 	}
-	void init();
-	void render();
-	void tick();
+	void init() override;
+	void render() override;
+	void tick() override;
 };

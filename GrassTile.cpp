@@ -4,19 +4,26 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <vector>
+#include <iostream>
 
 void GrassTile::init(void) {
 	//Load textures
-	this->textures.push_back(al_load_bitmap("res/tex/tile/grass.png"));
+	//std::cout << "INIT!";
+	RenderSystemSingleton* rs = rs->getInstance();
+    rs->setTexture(0, al_load_bitmap("res/tex/tile/grass.png"));
 }
 
 void GrassTile::render(void) {
+	//std::cout << "RENDER!";
 	renderQueueObject renderObject = renderQueueObject{
 		0,
-		this->x*16,
-		this->y*16
+		this->x,
+		this->y,
+		0
 	};
-	this->renderQueue.push_back(renderObject);
+	RenderSystemSingleton* rs = rs->getInstance();
+	rs->addToQueue(renderObject);
+	
 }
 
 void GrassTile::tick(void) {

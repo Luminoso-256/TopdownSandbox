@@ -1,7 +1,7 @@
 #pragma once
 #include "tile.h"
 #include <vector>
-class DirtTile : private Tile {
+class DirtTile : public Tile {
 public:
 	DirtTile(int x, int y) {
 		this->x = x;

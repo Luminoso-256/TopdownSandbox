@@ -57,11 +57,11 @@ list<Tile> loadTileData(string filename) {
 			advance(it, 1);
 			int type = stoi(*it, nullptr);
 			
-			tiles.push_back(
-				Tile{
-					x,y,type
-				}
-			);
+			//tiles.push_back(
+			//	Tile{
+			//		x,y,type
+			//	}
+			//);
 		}
 	}
 	saveStream.close();

@@ -65,11 +65,14 @@
     <ClInclude Include="tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DirtTile.h">
+      <Filter>Header Files\tiles</Filter>
+    </ClInclude>
     <ClInclude Include="GrassTile.h">
       <Filter>Header Files\tiles</Filter>
     </ClInclude>
-    <ClInclude Include="DirtTile.h">
-      <Filter>Header Files\tiles</Filter>
+    <ClInclude Include="renderSystem.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tiles.h">
       <Filter>Header Files</Filter>

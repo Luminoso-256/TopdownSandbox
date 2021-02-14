@@ -179,6 +179,7 @@
     <ClInclude Include="DirtTile.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="GrassTile.h" />
+    <ClInclude Include="renderSystem.h" />
     <ClInclude Include="saveload.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tiles.h" />

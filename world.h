@@ -9,9 +9,11 @@
 
 class World {
 public:
-	std::vector<Tile> tiles;
+	std::vector<Tile*> tiles;
 	//==Insert entity vec here when i have entity class ready==
 	std::string worldName; // name for save/load
-	std::vector<renderQueueObject> generateWorldRenderQueue; 
+	void init();
+	void tick();
+	void render();
 };
 

@@ -11,3 +11,8 @@ inline bool instanceOf(const T*) {
 	return is_base_of<Base, T>::value;
 }
 
+
+struct vector2 {
+    int x;
+    int y;
+};

@@ -7,7 +7,7 @@
 
 void DirtTile::init(void) {
 	//Load textures
-	this->textures.push_back(al_load_bitmap("res/tex/tile/dirt.png"));
+	//this->textures.push_back(al_load_bitmap("res/tex/tile/dirt.png"));
 }
 
 void DirtTile::render(void) {
