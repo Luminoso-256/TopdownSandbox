@@ -3,7 +3,7 @@
 #include <fstream>
 #include<list>
 #include<string>
-#include "world.h";
+#include "world.h"
 using namespace std;
 
 

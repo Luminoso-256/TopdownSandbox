@@ -179,9 +179,11 @@
     <ClInclude Include="GrassTile.h" />
     <ClInclude Include="renderSystem.h" />
     <ClInclude Include="saveload.h" />
+    <ClInclude Include="tile.fwd.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tiles.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="world.fwd.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

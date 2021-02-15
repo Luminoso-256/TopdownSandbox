@@ -3,6 +3,7 @@
 #include "world.h"
 #include <vector>
 #include <iostream>
+#include "tile.h"
 
 void World::init(void) {
 	for (Tile* tile : this->tiles) {
@@ -12,15 +13,19 @@ void World::init(void) {
 
 void World::render(void) {
 	//Get the queues updated tile side
-	for (Tile* tile : this->tiles) {
-		tile->render();
+	for (int i = 0; i < this->tiles.size(); i++) {
+		this->tiles[i]->render();
+		//std::cout << "tile at index " << i << " has UUID " << this->tiles[i]->UUID << "\n";
 	}
 	//Update entity queues
 
 
 	//render everything
-	RenderSystemSingleton* rs = rs->getInstance();
-	al_draw_bitmap(rs->getTexture(0), 13, 60, 0);
+	for (renderQueueObject queueObject: this->renderQueue)
+	{
+		
+		al_draw_bitmap(this->textures[queueObject.textureID], queueObject.textureX, queueObject.textureY, queueObject.flags);
+	}
 }
 
 void World::tick(void) {

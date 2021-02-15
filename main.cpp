@@ -7,11 +7,11 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <time.h>     
-#include "world.h"
 #include "saveload.h"
 #include <string>
 #include "util.h"
 #include "tile.h"
+#include "world.h"
 #include "tiles.h"
 #include "world.h"
 
@@ -73,15 +73,22 @@ int main()
     //Testing out the world class
     World world;
 
-    int maxWidth = (int)1500 / 16;
-    int maxHeight = (int)960 / 16;
-
+   // int maxWidth = (int)1500 / 16;
+   // int maxHeight = (int)960 / 16;
+    int maxWidth = (int)5;
+    int maxHeight = (int)5;
+   
+    GrassTile grass = GrassTile(0, 0, &world);
     for (int x = 0; x < maxWidth; x++) {
         for (int y = 0; y < maxHeight; y++) {
-            GrassTile grass = GrassTile(x, y);
-            world.tiles.push_back(&grass);
+            std::cout << "creating tile at "<<x<<","<<y<<"\n";
+            grass = GrassTile(x, y, &world);
+            GrassTile* grassptr = &grass;
+            world.tiles.push_back(grassptr);
+            grassptr = nullptr;
         }
     }
+    std::cout << "Total world vec len: " << world.tiles.size() << "\n";
 
     //Initialize world
     world.init();

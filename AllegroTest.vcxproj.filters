@@ -71,5 +71,11 @@
     <ClInclude Include="tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tile.fwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world.fwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
