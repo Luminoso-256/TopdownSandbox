@@ -10,12 +10,12 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
-
+#include <deque>
 class World {
 public:
 	ALLEGRO_BITMAP* textures[1024];
 	std::vector<renderQueueObject> renderQueue;
-	std::vector<Tile*> tiles;
+	std::deque<Tile> tiles;
 	//==Insert entity vec here when i have entity class ready==
 	std::string worldName; // name for save/load
 	void init();

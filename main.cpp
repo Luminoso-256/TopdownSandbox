@@ -77,15 +77,13 @@ int main()
    // int maxHeight = (int)960 / 16;
     int maxWidth = (int)5;
     int maxHeight = (int)5;
-   
-    GrassTile grass = GrassTile(0, 0, &world);
+
     for (int x = 0; x < maxWidth; x++) {
         for (int y = 0; y < maxHeight; y++) {
             std::cout << "creating tile at "<<x<<","<<y<<"\n";
-            grass = GrassTile(x, y, &world);
-            GrassTile* grassptr = &grass;
-            world.tiles.push_back(grassptr);
-            grassptr = nullptr;
+            Tile grass = GrassTile(x, y, &world);
+            world.tiles.push_back(grass);
+            //grassptr = nullptr;
         }
     }
     std::cout << "Total world vec len: " << world.tiles.size() << "\n";

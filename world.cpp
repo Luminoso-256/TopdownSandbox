@@ -6,15 +6,15 @@
 #include "tile.h"
 
 void World::init(void) {
-	for (Tile* tile : this->tiles) {
-		tile->init();
+	for (Tile tile : this->tiles) {
+		tile.init();
 	}
 }
 
 void World::render(void) {
 	//Get the queues updated tile side
 	for (int i = 0; i < this->tiles.size(); i++) {
-		this->tiles[i]->render();
+		this->tiles[i].render();
 		//std::cout << "tile at index " << i << " has UUID " << this->tiles[i]->UUID << "\n";
 	}
 	//Update entity queues
@@ -29,7 +29,7 @@ void World::render(void) {
 }
 
 void World::tick(void) {
-	for (Tile* tile : this->tiles) {
-		tile->tick();
+	for (Tile tile : this->tiles) {
+		tile.tick();
 	}
 }
